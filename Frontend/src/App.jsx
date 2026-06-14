@@ -1,12 +1,14 @@
-import { useState } from 'react'
 import './App.css'
+import Navbar from '../src/Components/Navbar.jsx'
+import Content from '../src/Components/Content.jsx'
 
 function App() {
-  const [name,setName] = useState('')
+  
 
   return (
     <>
-      
+      <Navbar/>
+      <Content/>
     </>
   )
 }
