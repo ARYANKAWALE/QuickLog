@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 function Hero() {
   return (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-gray-200 bg-[#FBF8FF]">
       <header className="bg-[#FFFFFF] text-black p-4 flex flex-row justify-around font-medium items-center">
         <div className="flex flex-row items-center gap-2">
           <Zap
@@ -67,7 +67,7 @@ function Hero() {
           </ul>
         </div>
         <div className="flex justify-between gap-3 px-2">
-          <button>Login</button>
+          <button className="p-2 px-4 rounded-lg hover:bg-[#9FBDE8]">Login</button>
           <button className="rounded-lg bg-[#2B7FFF] p-2 text-white">
             Get Started
           </button>

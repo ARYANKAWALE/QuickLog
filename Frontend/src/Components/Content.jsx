@@ -4,12 +4,11 @@ import gym2 from "../assets/gym2.jpg";
 
 function Content() {
   return (
-    <div className="flex flex-col pb-10 mx-39">
-      <div className="flex justify-evenly p-10">
+    <div className="flex flex-col pb-10 bg-[#FBF8FF]">
+      <div className="flex justify-evenly p-10 mx-39">
         <div className="flex flex-col gap-5">
-          <div className="p-1 bg-[#F4F4F5] w-fit rounded-lg">
+          <div className="p-1 bg-[#F4F4F5] w-fit rounded-xl border border-gray-200">
             <p className="flex flex-row px-2 py-1 gap-2 items-center">
-              {" "}
               <Sparkles size={20} className="text-[#3484FF]" />
               Log a workout in under 10 seconds
             </p>
@@ -65,18 +64,18 @@ function Content() {
           />
         </div>
       </div>
-      <div className="flex flex-row flex-col gap-10 justify-evenly">
-        <div className="border border-gray-300 w-fit h-50 rounded-xl p-6 m-auto">
+      <div className="flex flex-row flex-col gap-10 justify-evenly mx-39">
+        <div className="border border-gray-300 w-fit h-50 rounded-xl p-6 m-auto bg-[#F4F2FE]">
             <p className="pb-3"><Timer size={50} className="text-[#3484FF] bg-[#DFECFF] p-3 rounded-xl "/></p>
             <h1 className="font-bold text-2xl pb-1">One-Tap Logging</h1>
             <p className="text-[#71717B] font-medium">Save your routines and log entire sessions instantly. No friction, no excuses - just train and tap.</p>
         </div>
-        <div className="border border-gray-300 w-fit h-50 rounded-xl p-6">
+        <div className="border border-gray-300 w-fit h-50 rounded-xl p-6 m-auto bg-[#F4F2FE]">
             <p className="pb-3"><Gauge size={50} className="text-[#3484FF] bg-[#DFECFF] p-3 rounded-xl "/></p>
             <h1 className="font-bold text-2xl pb-1">Smart calorie buffer</h1>
             <p className="text-[#71717B] font-medium">Earn calories back from your workouts and see your real-time buffer so you can eat with confidence.</p>
         </div>
-        <div className="border border-gray-300 w-fit h-50 rounded-xl p-6">
+        <div className="border border-gray-300 w-fit h-50 rounded-xl p-6 m-auto bg-[#F4F2FE]">
             <p className="pb-3"><ChartLine size={50} className="text-[#3484FF] bg-[#DFECFF] p-3 rounded-xl"/></p>
             <h1 className="font-bold text-2xl pb-1">Progress Insights</h1>
             <p className="text-[#71717B] font-medium">Visualize strength gains and calorie trends with clean charts that keep you motivated week after week.</p>
