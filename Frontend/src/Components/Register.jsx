@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext.jsx";
 import { 
   Mail, 
   Lock, 
@@ -17,6 +18,8 @@ import {
   AlertCircle
 } from "lucide-react";
 
+const BACKEND_URL = "http://localhost:3000/api/v1/user";
+
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,7 +32,10 @@ function Register() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -60,11 +66,29 @@ function Register() {
 
     setIsSubmitting(true);
     
-    // Simulate API request
-    setTimeout(() => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: name, email, password }),
+      });
+      const json = await res.json();
+
+      if (json.success && json.data) {
+        login(json.data.token, json.data.user);
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/nutrition");
+        }, 800);
+      } else {
+        setError(json.message || "Registration failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Register error:", err);
+      setError("Could not connect to the server. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setSuccess(true);
-    }, 1500);
+    }
   };
 
   return (

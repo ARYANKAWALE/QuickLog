@@ -5,7 +5,9 @@ import Layout from './Layout.jsx';
 import Content from './Components/Content.jsx';
 import Login from './Components/Login.jsx';
 import Register from './Components/Register.jsx';
-import Nutrition from './Components/Nutrition.jsx'
+import Nutrition from './Components/Nutrition.jsx';
+import NotFound from './Components/NotFound.jsx';
+import { AuthProvider } from './Components/AuthContext.jsx';
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
       { path: 'setting', element: <div>Settings Page</div> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+      { path: '*', element: <NotFound /> },
     ]
   }
 ])
@@ -28,6 +31,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 );

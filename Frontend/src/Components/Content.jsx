@@ -1,8 +1,74 @@
+import { useState, useEffect } from "react";
 import { Sparkles, MoveRight, Play, Timer, Gauge, ChartLine } from "lucide-react";
 import gym1 from "../assets/gym1.jpg";
 import gym2 from "../assets/gym2.jpg";
 
+const BACKEND_URL = "http://localhost:3000/api/v1/stats";
+
+// Helper function to format values based on magnitude
+const formatStatValue = (val, type) => {
+  if (type === "rating") {
+    return val.toFixed(1);
+  }
+  if (val >= 1000000) {
+    return `${(val / 1000000).toFixed(1).replace(".0", "")}M+`;
+  }
+  if (val >= 1000) {
+    return `${(val / 1000).toFixed(1).replace(".0", "")}k+`;
+  }
+  return Math.floor(val).toString();
+};
+
+// Premium animated count-up component with easing
+function AnimatedCounter({ target, duration = 2000, format }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTimestamp = null;
+    let animationFrameId;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      // Ease out quad
+      const easeOutQuad = progress * (2 - progress);
+      setCount(easeOutQuad * target);
+
+      if (progress < 1) {
+        animationFrameId = window.requestAnimationFrame(step);
+      }
+    };
+
+    animationFrameId = window.requestAnimationFrame(step);
+
+    return () => {
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [target, duration]);
+
+  return <span>{format(count)}</span>;
+}
+
 function Content() {
+  const [stats, setStats] = useState({
+    activeUsers: 0,
+    appStoreRating: 4.9,
+    workoutsLogged: 0,
+  });
+
+  useEffect(() => {
+    fetch(BACKEND_URL)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success && res.data) {
+          setStats(res.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching homepage stats:", err));
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-[#FBF8FF] overflow-x-hidden pb-20">
       
@@ -47,17 +113,32 @@ function Content() {
             {/* Stats section */}
             <div className="flex flex-row p-4 gap-6 sm:gap-12 justify-center lg:justify-start mt-6 border-t border-gray-100 pt-8">
               <div className="flex flex-col">
-                <span className="text-3xl font-extrabold text-gray-950">120k+</span>
+                <span className="text-3xl font-extrabold text-gray-950">
+                  <AnimatedCounter
+                    target={stats.activeUsers}
+                    format={(val) => formatStatValue(val, "users")}
+                  />
+                </span>
                 <span className="text-sm text-[#71717B] font-medium">Active users</span>
               </div>
               <div className="h-10 w-px bg-gray-200 self-center"></div>
               <div className="flex flex-col">
-                <span className="text-3xl font-extrabold text-gray-950">4.9</span>
+                <span className="text-3xl font-extrabold text-gray-950">
+                  <AnimatedCounter
+                    target={stats.appStoreRating}
+                    format={(val) => formatStatValue(val, "rating")}
+                  />
+                </span>
                 <span className="text-sm text-[#71717B] font-medium">App store rating</span>
               </div>
               <div className="h-10 w-px bg-gray-200 self-center"></div>
               <div className="flex flex-col">
-                <span className="text-3xl font-extrabold text-gray-950">8M+</span>
+                <span className="text-3xl font-extrabold text-gray-950">
+                  <AnimatedCounter
+                    target={stats.workoutsLogged}
+                    format={(val) => formatStatValue(val, "workouts")}
+                  />
+                </span>
                 <span className="text-sm text-[#71717B] font-medium">Workouts logged</span>
               </div>
             </div>

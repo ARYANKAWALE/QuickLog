@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext.jsx";
 import {
   Dumbbell,
   House,
@@ -9,13 +10,23 @@ import {
   Zap,
   Menu,
   X,
+  LogOut,
+  UserCircle,
 } from "lucide-react";
 
 function Hero() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, isLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+    navigate("/login");
   };
 
   const navLinks = [
@@ -58,18 +69,36 @@ function Hero() {
 
         {/* Desktop CTA Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Link 
-            to="/login" 
-            className="px-5 py-2.5 rounded-xl hover:bg-gray-50 text-gray-700 hover:text-gray-900 transition-colors duration-200 font-semibold"
-          >
-            Login
-          </Link>
-          <Link 
-            to="/register" 
-            className="rounded-xl bg-[#2B7FFF] px-5 py-2.5 text-white font-bold hover:bg-blue-600 active:scale-[0.98] transition-all duration-200 shadow-md shadow-blue-500/10"
-          >
-            Get Started
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-100">
+                <UserCircle size={20} className="text-[#2B7FFF]" />
+                <span className="text-sm font-semibold text-gray-700">{user?.username}</span>
+              </div>
+              <button 
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors duration-200 font-semibold cursor-pointer"
+              >
+                <LogOut size={18} />
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link 
+                to="/login" 
+                className="px-5 py-2.5 rounded-xl hover:bg-gray-50 text-gray-700 hover:text-gray-900 transition-colors duration-200 font-semibold"
+              >
+                Login
+              </Link>
+              <Link 
+                to="/register" 
+                className="rounded-xl bg-[#2B7FFF] px-5 py-2.5 text-white font-bold hover:bg-blue-600 active:scale-[0.98] transition-all duration-200 shadow-md shadow-blue-500/10"
+              >
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Hamburger Menu Toggle (Mobile) */}
@@ -101,20 +130,38 @@ function Hero() {
             </nav>
             
             <div className="border-t border-gray-100 pt-4 px-6 flex flex-col gap-3">
-              <Link
-                to="/login"
-                onClick={() => setIsOpen(false)}
-                className="w-full text-center py-3 border border-gray-200 rounded-2xl hover:bg-gray-50 text-gray-700 font-bold transition-all"
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                onClick={() => setIsOpen(false)}
-                className="w-full text-center py-3 bg-[#2B7FFF] text-white rounded-2xl font-bold hover:bg-blue-600 shadow-md shadow-blue-500/10 transition-all"
-              >
-                Get Started
-              </Link>
+              {isLoggedIn ? (
+                <>
+                  <div className="flex items-center gap-2 py-3 px-4 bg-gray-50 rounded-2xl border border-gray-100">
+                    <UserCircle size={20} className="text-[#2B7FFF]" />
+                    <span className="font-bold text-gray-700">{user?.username}</span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-center py-3 border border-red-200 rounded-2xl hover:bg-red-50 text-red-600 font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <LogOut size={18} />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="w-full text-center py-3 border border-gray-200 rounded-2xl hover:bg-gray-50 text-gray-700 font-bold transition-all"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setIsOpen(false)}
+                    className="w-full text-center py-3 bg-[#2B7FFF] text-white rounded-2xl font-bold hover:bg-blue-600 shadow-md shadow-blue-500/10 transition-all"
+                  >
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -125,3 +172,4 @@ function Hero() {
 }
 
 export default Hero;
+
