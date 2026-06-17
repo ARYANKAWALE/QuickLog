@@ -9,6 +9,7 @@ import Nutrition from './Components/Nutrition.jsx';
 import NotFound from './Components/NotFound.jsx';
 import Settings from './Components/Settings.jsx';
 import { AuthProvider } from './Components/AuthContext.jsx';
+import { ThemeProvider } from './Components/ThemeContext.jsx';
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -32,8 +33,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>,
 );

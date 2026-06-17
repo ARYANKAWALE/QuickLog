@@ -802,7 +802,7 @@ function Nutrition() {
       }
     `}</style>
 
-    <div className="w-full bg-[#FBF8FF] flex flex-col flex-grow">
+    <div className="w-full bg-background text-on-surface flex flex-col flex-grow">
       <main className="flex-grow pt-7 pb-section-gap px-gutter-desktop max-w-[1310px] mx-auto w-full">
         {/* Dashboard Header */}
       <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 mb-stack-lg">
@@ -974,16 +974,16 @@ function Nutrition() {
 
           <div className="mt-auto pt-6 border-t border-separator grid grid-cols-2 gap-4">
             {/* Water Intake Card */}
-            <div className="bg-[#EAF3FF]/60 border border-[#D5E8FF] p-4 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+            <div className="bg-[#EAF3FF]/60 dark:bg-blue-950/20 border border-[#D5E8FF] dark:border-blue-900/30 p-4 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
               <div className="flex justify-between items-center w-full">
-                <div className="p-2 rounded-xl bg-[#0057bf]/10 text-[#0057bf] flex items-center justify-center">
+                <div className="p-2 rounded-xl bg-[#0057bf]/10 text-[#0057bf] dark:text-blue-400 flex items-center justify-center">
                   <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>water_drop</span>
                 </div>
                 <div className="flex gap-1.5">
                   <button
                     onClick={() => adjustWater(-100)}
                     disabled={waterIntake <= 0}
-                    className="w-8 h-8 rounded-full bg-white hover:bg-surface-container-high border border-[#D5E8FF] flex items-center justify-center text-[#0057bf] cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95 shadow-sm"
+                    className="w-8 h-8 rounded-full bg-surface-container-lowest hover:bg-surface-container-high border border-[#D5E8FF] dark:border-blue-900/30 flex items-center justify-center text-[#0057bf] dark:text-blue-400 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95 shadow-sm"
                     title="Remove 1 glass (100ml)"
                   >
                     <span className="material-symbols-outlined text-sm font-bold">remove</span>
@@ -1003,7 +1003,7 @@ function Nutrition() {
                 <span className="block text-2xl text-on-surface font-bold mt-1">
                   {(waterIntake / 100).toFixed(0)} <span className="text-xs font-semibold text-secondary">/ {(waterGoal / 100).toFixed(0)} glasses</span>
                 </span>
-                <span className="block text-[10px] text-[#0057bf] font-semibold mt-1">({waterIntake} ml)</span>
+                <span className="block text-[10px] text-[#0057bf] dark:text-blue-400 font-semibold mt-1">({waterIntake} ml)</span>
               </div>
 
               {/* Progress bar */}
@@ -1016,9 +1016,9 @@ function Nutrition() {
             </div>
 
             {/* Fiber Card */}
-            <div className="bg-[#FDF5EB]/60 border border-[#F6E6D2] p-4 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+            <div className="bg-[#FDF5EB]/60 dark:bg-orange-950/20 border border-[#F6E6D2] dark:border-orange-900/30 p-4 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
               <div className="flex justify-between items-center w-full">
-                <div className="p-2 rounded-xl bg-[#E67E22]/10 text-[#E67E22] flex items-center justify-center">
+                <div className="p-2 rounded-xl bg-[#E67E22]/10 text-[#E67E22] dark:text-orange-400 flex items-center justify-center">
                   <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>grass</span>
                 </div>
               </div>
@@ -1028,7 +1028,7 @@ function Nutrition() {
                 <span className="block text-2xl text-on-surface font-bold mt-1">
                   {fiberConsumed}g <span className="text-xs font-semibold text-secondary">/ {fiberGoal}g</span>
                 </span>
-                <span className="block text-[10px] text-[#E67E22] font-semibold mt-1">
+                <span className="block text-[10px] text-[#E67E22] dark:text-orange-400 font-semibold mt-1">
                   {fiberConsumed >= fiberGoal ? 'Goal achieved!' : `${fiberGoal - fiberConsumed}g left`}
                 </span>
               </div>

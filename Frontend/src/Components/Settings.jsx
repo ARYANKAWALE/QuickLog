@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "./AuthContext.jsx";
 import { useNavigate, Link } from "react-router-dom";
 import gym1 from "../assets/gym1.jpg";
+import { useTheme } from "./ThemeContext.jsx";
 import {
   ChevronRight,
   Moon,
@@ -24,20 +25,19 @@ function Settings() {
     navigate("/login");
   };
 
-  const [theme, setTheme] = useState("Light");
-  const [toggle, setToggle] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const toggle = theme === "dark";
 
   const handleToggle = () => {
-    setToggle(!toggle);
-    setTheme(theme === "Dark" ? "Light" : "Dark");
+    toggleTheme();
   };
 
   return (
-    <div className="w-full bg-[#FBF8FF] flex flex-col flex-grow">
+    <div className="w-full bg-background text-on-surface flex flex-col flex-grow">
       {isLoggedIn ? (
         <div>
           {/* Left side */}
-          <div className="flex-grow border border-gray-300 items-center flex flex-row pt-7 pb-section-gap px-gutter-desktop max-w-[1310px] mx-auto w-full justify-between bg-white rounded-xl my-10">
+          <div className="flex-grow border border-separator items-center flex flex-row pt-7 pb-section-gap px-gutter-desktop max-w-[1310px] mx-auto w-full justify-between bg-surface-container-lowest rounded-xl my-10 shadow-sm">
             <div className="flex w-[320px] justify-around gap-5">
               <div className="flex">
                 <img
@@ -51,11 +51,11 @@ function Settings() {
               </div>
             </div>
             <div className="flex gap-5">
-              <div className="px-3 py-2 rounded-lg text-black border border-[#026FEF] bg-gray-50 flex flex-row gap-2">
-                <Share2 className="text-[#026FEF]" />
-                <button className="text-[#026FEF]">Share stats</button>
+              <div className="px-3 py-2 rounded-lg text-[#026FEF] border border-primary bg-surface-container-lowest flex flex-row gap-2">
+                <Share2 className="text-primary" />
+                <button className="text-primary">Share stats</button>
               </div>
-              <button className="px-5 py-2 rounded-lg bg-blue-500 text-white font-bold cursor-pointer">
+              <button className="px-5 py-2 rounded-lg bg-primary text-white font-bold cursor-pointer hover:opacity-90">
                 Edit profile
               </button>
             </div>
@@ -63,22 +63,22 @@ function Settings() {
           <div>
             <div className="flex flex-row justify-evenly">
               <div className="flex flex-col gap-5">
-                <ul>
-                  <li className="p-2 rounded-lg hover:bg-blue-200">
+                <ul className="text-secondary">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
                     <Link>Account details</Link>
                   </li>
-                  <li className="p-2 rounded-lg hover:bg-blue-200">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
                     Preferences
                   </li>
-                  <li className="p-2 rounded-lg hover:bg-blue-200">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
                     Privacy & safety
                   </li>
-                  <li className="p-2 rounded-lg hover:bg-blue-200">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
                     Subscription
                   </li>
                 </ul>
-                <div className="bg-gray-200 h-[1px] w-full"></div>
-                <div className="rounded-lg px-4 justify-center hover:bg-red-200 py-2 text-red-500 cursor-pointer flex flex-row gap-2 items-center">
+                <div className="bg-separator h-[1px] w-full"></div>
+                <div className="rounded-lg px-4 justify-center hover:bg-red-500/10 py-2 text-red-500 cursor-pointer flex flex-row gap-2 items-center">
                   <LogOut />
                   <button onClick={handleLogout}>
                     Logout
@@ -88,20 +88,20 @@ function Settings() {
 
               {/* Right side */}
               <div className="flex flex-col gap-6 w-[50%]">
-                <div className="bg-[#F4F2FE] w-full rounded-2xl border border-gray-200">
+                <div className="bg-surface-container-low w-full rounded-2xl border border-separator">
                   <div className="flex flex-row justify-between px-10 mt-5">
-                    <p className="font-medium text-xl">Account Details</p>
-                    <p className="bg-[#0057BF] py-1 px-2 rounded-full text-white">
+                    <p className="font-medium text-xl text-on-surface">Account Details</p>
+                    <p className="bg-primary py-1 px-2 rounded-full text-white">
                       Pro
                     </p>
                   </div>
 
-                  <div className="bg-[#F5F4FA] p-6 rounded-xl w-full">
+                  <div className="p-6 rounded-xl w-full">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                       <div className="flex flex-col gap-2">
                         <label
                           htmlFor="fullName"
-                          className="text-sm font-medium text-gray-500"
+                          className="text-sm font-medium text-secondary"
                         >
                           Full Name
                         </label>
@@ -109,21 +109,21 @@ function Settings() {
                           <input
                             id="fullName"
                             type="text"
-                            className="w-full bg-white text-gray-800 py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-gray-100/50 cursor-pointer outline-none font-medium text-base"
+                            className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
                             value={user?.username || "Username not exist"}
                             readOnly
                           />
-                          <span className="absolute right-4 text-gray-400 pointer-events-none text-xs">
+                          <span className="absolute right-4 text-secondary pointer-events-none text-xs">
                             <ChevronRight />
                           </span>
                         </div>
                       </div>
 
-                      {/* Email Field (Now properly placed inside the grid row) */}
+                      {/* Email Field */}
                       <div className="flex flex-col gap-2">
                         <label
                           htmlFor="email"
-                          className="text-sm font-medium text-gray-500"
+                          className="text-sm font-medium text-secondary"
                         >
                           Email
                         </label>
@@ -131,11 +131,11 @@ function Settings() {
                           <input
                             id="email"
                             type="email"
-                            className="w-full bg-white text-gray-800 py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-gray-100/50 cursor-pointer outline-none font-medium text-base"
+                            className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
                             value={user?.email || "Email not exist"}
                             readOnly
                           />
-                          <span className="absolute right-4 text-gray-400 pointer-events-none text-xs">
+                          <span className="absolute right-4 text-secondary pointer-events-none text-xs">
                             <ChevronRight />
                           </span>
                         </div>
@@ -143,38 +143,38 @@ function Settings() {
                     </div>
                   </div>
 
-                  <div className="flex flex-row items-center justify-between gap-40 p-5 bg-[#D6E1FE] border border-[#BACEFF] m-10 rounded-xl">
+                  <div className="flex flex-row items-center justify-between gap-40 p-5 bg-primary-muted border border-primary/20 m-10 rounded-xl">
                     <div className="flex flex-row items-center gap-2">
-                      <div className="">
-                        <Star className="p-1 h-14 w-auto rounded-full bg-[#026FEF] text-white" />
+                      <div>
+                        <Star className="p-1 h-14 w-auto rounded-full bg-primary text-white" />
                       </div>
                       <div>
-                        <p className="font-bold text-[#026FEF]">
+                        <p className="font-bold text-primary">
                           Elite Annual Plan
                         </p>
-                        <p className="text-sm text-[#026FEF]">
+                        <p className="text-sm text-primary">
                           renew on 1 june 2026
                         </p>
                       </div>
                     </div>
                     <div>
-                      <p className="text-[#026FEF]">Manage Plans</p>
+                      <p className="text-primary font-semibold">Manage Plans</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-[#F4F2FE] w-full rounded-2xl border border-gray-200">
+                <div className="bg-surface-container-low w-full rounded-2xl border border-separator">
                   <div className="flex flex-row justify-between px-10 mt-5">
-                    <p className="font-medium text-xl">Preferences</p>
+                    <p className="font-medium text-xl text-on-surface">Preferences</p>
                   </div>
                   <div className="p-6">
                     <div className="flex gap-5 flex-col">
-                      <div className="flex flex-row items-center justify-between bg-white p-4 rounded-xl">
+                      <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35">
                         <div className="flex flex-row items-center gap-3">
-                          <Moon className="text-[#026FEF]" />
+                          <Moon className="text-primary" />
                           <div>
-                            <p className="font-medium text-lg">{theme} Mode</p>
-                            <p className="text-sm text-gray-500">
+                            <p className="font-medium text-lg text-on-surface">{theme === "dark" ? "Dark" : "Light"} Mode</p>
+                            <p className="text-sm text-secondary">
                               Switch between light theme & dark themes
                             </p>
                           </div>
@@ -182,7 +182,7 @@ function Settings() {
                         <button
                           onClick={handleToggle}
                           className={`w-11 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
-                            toggle ? "bg-[#026FEF]" : "bg-gray-300"
+                            toggle ? "bg-primary" : "bg-surface-dim"
                           }`}
                         >
                           <div
@@ -192,41 +192,41 @@ function Settings() {
                           />
                         </button>
                       </div>
-                      <div className="flex flex-row items-center justify-between bg-white p-4 rounded-xl">
+                      <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35">
                         <div className="flex flex-row items-center gap-3">
-                          <BriefcaseMedical className="text-[#026FEF]" />
+                          <BriefcaseMedical className="text-primary" />
                           <div>
-                            <p className="font-medium text-lg">
+                            <p className="font-medium text-lg text-on-surface">
                               Health App Integration
                             </p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-secondary">
                               Sync your metrics with Apple Health or Google Fit
                             </p>
                           </div>
                         </div>
-                        <button className="py-1 px-2 rounded-full bg-[#DAD9E4] text-[#474649] text-sm">
+                        <button className="py-1 px-2 rounded-full bg-surface-dim text-on-secondary-fixed-variant text-sm font-semibold">
                           Soon
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="bg-[#F4F2FE] w-full rounded-2xl border border-gray-200 mb-10">
+                <div className="bg-surface-container-low w-full rounded-2xl border border-separator mb-10">
                   <div className="flex flex-row justify-between px-10 mt-5">
-                    <p className="font-medium text-xl">Security & Sessions</p>
+                    <p className="font-medium text-xl text-on-surface">Security & Sessions</p>
                   </div>
                   <div className="p-6">
-                    <div className="flex flex-row items-center justify-between bg-white p-4 rounded-xl">
+                    <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35">
                       <div className="flex flex-row items-center gap-3">
-                        <Laptop className="text-[#026FEF] h-12 w-auto p-2 rounded-full bg-[#DFECFF]" />
+                        <Laptop className="text-primary h-12 w-auto p-2 rounded-full bg-primary-muted" />
                         <div>
-                          <p className="font-medium text-lg">Your Device</p>
-                          <p className="text-sm text-[#026FEF]">
-                            Currunt Session
+                          <p className="font-medium text-lg text-on-surface">Your Device</p>
+                          <p className="text-sm text-primary font-semibold">
+                            Current Session
                           </p>
                         </div>
                       </div>
-                      <EllipsisVertical />
+                      <EllipsisVertical className="text-secondary" />
                     </div>
                   </div>
                 </div>

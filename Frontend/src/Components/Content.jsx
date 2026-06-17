@@ -70,7 +70,7 @@ function Content() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-[#FBF8FF] overflow-x-hidden pb-20">
+    <div className="w-full min-h-screen bg-background text-on-surface overflow-x-hidden pb-20">
       
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
@@ -80,19 +80,19 @@ function Content() {
           <div className="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
             
             {/* Sparkle Badge */}
-            <div className="inline-flex items-center gap-2 p-1 px-3 bg-[#F4F4F5] w-fit rounded-xl border border-gray-200 mx-auto lg:mx-0 shadow-sm">
+            <div className="inline-flex items-center gap-2 p-1 px-3 bg-surface-container-low w-fit rounded-xl border border-separator mx-auto lg:mx-0 shadow-sm">
               <Sparkles size={18} className="text-[#3484FF]" />
-              <span className="text-sm font-semibold text-gray-700">Log a workout in under 10 seconds</span>
+              <span className="text-sm font-semibold text-secondary">Log a workout in under 10 seconds</span>
             </div>
             
             {/* Main Header */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-on-surface leading-tight">
               Track your gym & stay inside your{" "}
               <span className="text-[#2B7FFF]">calorie buffer</span>
             </h1>
             
             {/* Description */}
-            <p className="text-lg sm:text-xl text-[#71717B] font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl text-secondary font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
               QuickLog combines effortless workout logging with a smart calorie
               buffer system, so you always know how much room you have left to
               hit your goals.
@@ -104,42 +104,42 @@ function Content() {
                 Start Tracking free
                 <MoveRight size={20} className="text-[#FFFFFF]" />
               </button>
-              <button className="bg-[#FFFFFF] text-black px-6 py-4 rounded-2xl flex items-center justify-center gap-2 border border-gray-200 font-semibold cursor-pointer hover:bg-gray-50 active:scale-98 transition-all duration-200 text-lg">
-                <Play size={18} className="text-black fill-current" />
+              <button className="bg-surface-container-lowest text-on-surface px-6 py-4 rounded-2xl flex items-center justify-center gap-2 border border-separator font-semibold cursor-pointer hover:bg-surface-container-high active:scale-98 transition-all duration-200 text-lg">
+                <Play size={18} className="text-on-surface fill-current" />
                 Watch demo
               </button>
             </div>
             
             {/* Stats section */}
-            <div className="flex flex-row p-4 gap-6 sm:gap-12 justify-center lg:justify-start mt-6 border-t border-gray-100 pt-8">
+            <div className="flex flex-row p-4 gap-6 sm:gap-12 justify-center lg:justify-start mt-6 border-t border-separator pt-8">
               <div className="flex flex-col">
-                <span className="text-3xl font-extrabold text-gray-950">
+                <span className="text-3xl font-extrabold text-on-surface">
                   <AnimatedCounter
                     target={stats.activeUsers}
                     format={(val) => formatStatValue(val, "users")}
                   />
                 </span>
-                <span className="text-sm text-[#71717B] font-medium">Active users</span>
+                <span className="text-sm text-secondary font-medium">Active users</span>
               </div>
-              <div className="h-10 w-px bg-gray-200 self-center"></div>
+              <div className="h-10 w-px bg-separator self-center"></div>
               <div className="flex flex-col">
-                <span className="text-3xl font-extrabold text-gray-950">
+                <span className="text-3xl font-extrabold text-on-surface">
                   <AnimatedCounter
                     target={stats.appStoreRating}
                     format={(val) => formatStatValue(val, "rating")}
                   />
                 </span>
-                <span className="text-sm text-[#71717B] font-medium">App store rating</span>
+                <span className="text-sm text-secondary font-medium">App store rating</span>
               </div>
-              <div className="h-10 w-px bg-gray-200 self-center"></div>
+              <div className="h-10 w-px bg-separator self-center"></div>
               <div className="flex flex-col">
-                <span className="text-3xl font-extrabold text-gray-950">
+                <span className="text-3xl font-extrabold text-on-surface">
                   <AnimatedCounter
                     target={stats.workoutsLogged}
                     format={(val) => formatStatValue(val, "workouts")}
                   />
                 </span>
-                <span className="text-sm text-[#71717B] font-medium">Workouts logged</span>
+                <span className="text-sm text-secondary font-medium">Workouts logged</span>
               </div>
             </div>
 
@@ -167,39 +167,39 @@ function Content() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* Feature Card 1 */}
-          <div className="border border-gray-200 rounded-3xl p-8 bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+          <div className="border border-separator rounded-3xl p-8 bg-surface-container-lowest hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
             <div>
               <div className="pb-4">
-                <Timer size={48} className="text-[#2B7FFF] bg-blue-50 p-2.5 rounded-2xl" />
+                <Timer size={48} className="text-[#2B7FFF] bg-primary-muted p-2.5 rounded-2xl" />
               </div>
-              <h2 className="font-extrabold text-xl text-gray-950 pb-2">One-Tap Logging</h2>
-              <p className="text-[#71717B] font-medium text-sm sm:text-base leading-relaxed">
+              <h2 className="font-extrabold text-xl text-on-surface pb-2">One-Tap Logging</h2>
+              <p className="text-secondary font-medium text-sm sm:text-base leading-relaxed">
                 Save your routines and log entire sessions instantly. No friction, no excuses - just train and tap.
               </p>
             </div>
           </div>
           
           {/* Feature Card 2 */}
-          <div className="border border-gray-200 rounded-3xl p-8 bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+          <div className="border border-separator rounded-3xl p-8 bg-surface-container-lowest hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
             <div>
               <div className="pb-4">
-                <Gauge size={48} className="text-[#2B7FFF] bg-blue-50 p-2.5 rounded-2xl" />
+                <Gauge size={48} className="text-[#2B7FFF] bg-primary-muted p-2.5 rounded-2xl" />
               </div>
-              <h2 className="font-extrabold text-xl text-gray-950 pb-2">Smart Calorie Buffer</h2>
-              <p className="text-[#71717B] font-medium text-sm sm:text-base leading-relaxed">
+              <h2 className="font-extrabold text-xl text-on-surface pb-2">Smart Calorie Buffer</h2>
+              <p className="text-secondary font-medium text-sm sm:text-base leading-relaxed">
                 Earn calories back from your workouts and see your real-time buffer so you can eat with confidence.
               </p>
             </div>
           </div>
           
           {/* Feature Card 3 */}
-          <div className="border border-gray-200 rounded-3xl p-8 bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+          <div className="border border-separator rounded-3xl p-8 bg-surface-container-lowest hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
             <div>
               <div className="pb-4">
-                <ChartLine size={48} className="text-[#2B7FFF] bg-blue-50 p-2.5 rounded-2xl" />
+                <ChartLine size={48} className="text-[#2B7FFF] bg-primary-muted p-2.5 rounded-2xl" />
               </div>
-              <h2 className="font-extrabold text-xl text-gray-950 pb-2">Progress Insights</h2>
-              <p className="text-[#71717B] font-medium text-sm sm:text-base leading-relaxed">
+              <h2 className="font-extrabold text-xl text-on-surface pb-2">Progress Insights</h2>
+              <p className="text-secondary font-medium text-sm sm:text-base leading-relaxed">
                 Visualize strength gains and calorie trends with clean charts that keep you motivated week after week.
               </p>
             </div>

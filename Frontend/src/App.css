@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-on-error: #ffffff;
   --color-surface-container-highest: #e3e1ed;
@@ -93,8 +95,40 @@ body {
   backdrop-filter: blur(10px);
 }
 
+.dark .glass-card {
+  background: rgba(24, 24, 27, 0.95);
+}
+
 .progress-ring__circle {
   transition: stroke-dashoffset 0.35s;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+}
+
+.dark {
+  --color-background: #09090b;
+  --color-surface: #09090b;
+  --color-on-background: #fafafa;
+  --color-on-surface: #fafafa;
+  --color-surface-container-lowest: #09090b;
+  --color-surface-container-low: #18181b;
+  --color-surface-container: #27272a;
+  --color-surface-container-high: #3f3f46;
+  --color-surface-container-highest: #52525b;
+  --color-separator: #27272a;
+  --color-secondary: #a1a1aa;
+  --color-outline: #71717a;
+  --color-surface-dim: #27272a;
+  --color-surface-bright: #3f3f46;
+  --color-on-secondary: #09090b;
+  --color-on-secondary-container: #a1a1aa;
+  --color-on-secondary-fixed-variant: #e4e4e7;
+  --color-on-secondary-fixed: #ffffff;
+}
+
+/* Smooth 1-second theme transition */
+*, *::before, *::after {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }

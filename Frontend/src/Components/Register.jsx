@@ -92,25 +92,25 @@ function Register() {
   };
 
   return (
-    <div className="min-h-[85vh] w-full flex items-center justify-center bg-[#FBF8FF] py-12 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-12 min-h-[600px] border border-gray-100">
+    <div className="min-h-[85vh] w-full flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8 font-sans text-on-surface">
+      <div className="w-full max-w-5xl bg-surface-container-lowest rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-12 min-h-[600px] border border-separator">
         
         {/* Left Column: Register Form */}
-        <div className="md:col-span-6 p-8 sm:p-12 flex flex-col justify-center bg-white">
+        <div className="md:col-span-6 p-8 sm:p-12 flex flex-col justify-center bg-surface-container-lowest">
           <div className="w-full max-w-md mx-auto">
             
             {/* Mobile Brand Logo */}
             <div className="flex md:hidden items-center gap-2 mb-8 justify-center">
               <Zap size={32} className="text-white bg-[#2B7FFF] p-1.5 rounded-lg shadow-md shadow-blue-500/20" />
-              <span className="text-xl font-bold tracking-tight text-gray-900">QuickLog</span>
+              <span className="text-xl font-bold tracking-tight text-on-surface">QuickLog</span>
             </div>
 
             {/* Header */}
             <div className="text-center md:text-left mb-6">
-              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              <h2 className="text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">
                 Create Account
               </h2>
-              <p className="mt-2 text-sm text-[#71717B]">
+              <p className="mt-2 text-sm text-secondary">
                 Start your 14-day free trial. No credit card required.
               </p>
             </div>
@@ -119,7 +119,7 @@ function Register() {
             <div className="grid grid-cols-2 gap-3 mb-6">
               <button 
                 type="button"
-                className="flex items-center justify-center px-4 py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer font-medium text-sm text-gray-700 active:scale-98"
+                className="flex items-center justify-center px-4 py-2.5 border border-separator rounded-xl hover:bg-surface-container transition-colors duration-200 cursor-pointer font-medium text-sm text-secondary hover:text-on-surface active:scale-98"
               >
                 {/* Google Logo SVG */}
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
@@ -132,7 +132,7 @@ function Register() {
               </button>
               <button 
                 type="button"
-                className="flex items-center justify-center px-4 py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer font-medium text-sm text-gray-700 active:scale-98"
+                className="flex items-center justify-center px-4 py-2.5 border border-separator rounded-xl hover:bg-surface-container transition-colors duration-200 cursor-pointer font-medium text-sm text-secondary hover:text-on-surface active:scale-98"
               >
                 {/* Apple Logo SVG */}
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
@@ -145,9 +145,9 @@ function Register() {
             {/* Divider */}
             <div className="relative my-6 flex items-center justify-center">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-150"></div>
+                <div className="w-full border-t border-separator"></div>
               </div>
-              <span className="relative px-3 bg-white text-xs text-gray-400 uppercase tracking-wider">
+              <span className="relative px-3 bg-surface-container-lowest text-xs text-secondary uppercase tracking-wider">
                 or register with email
               </span>
             </div>
@@ -178,12 +178,12 @@ function Register() {
               
               {/* Full Name Input Group */}
               <div className="flex flex-col gap-1.5 relative group">
-                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <label className="text-xs font-semibold text-secondary uppercase tracking-wider">
                   Full Name
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <User className="h-5 w-5 text-gray-400 group-focus-within:text-[#2B7FFF] transition-colors" />
+                    <User className="h-5 w-5 text-secondary group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type="text"
@@ -191,19 +191,19 @@ function Register() {
                     onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
                     disabled={isSubmitting || success}
-                    className="block w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-2xl bg-gray-50/50 hover:bg-white focus:bg-white placeholder-gray-400 focus:border-[#2B7FFF] focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-200 text-gray-900 text-sm font-normal disabled:opacity-50"
+                    className="block w-full pl-11 pr-4 py-2.5 border border-separator rounded-2xl bg-surface-container-low hover:bg-surface-container-lowest focus:bg-surface-container-lowest placeholder-secondary focus:border-primary focus:ring-4 focus:ring-blue-100/30 outline-none transition-all duration-200 text-on-surface text-sm font-normal disabled:opacity-50"
                   />
                 </div>
               </div>
 
               {/* Email Input Group */}
               <div className="flex flex-col gap-1.5 relative group">
-                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <label className="text-xs font-semibold text-secondary uppercase tracking-wider">
                   Email Address
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-[#2B7FFF] transition-colors" />
+                    <Mail className="h-5 w-5 text-secondary group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type="email"
@@ -211,19 +211,19 @@ function Register() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
                     disabled={isSubmitting || success}
-                    className="block w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-2xl bg-gray-50/50 hover:bg-white focus:bg-white placeholder-gray-400 focus:border-[#2B7FFF] focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-200 text-gray-900 text-sm font-normal disabled:opacity-50"
+                    className="block w-full pl-11 pr-4 py-2.5 border border-separator rounded-2xl bg-surface-container-low hover:bg-surface-container-lowest focus:bg-surface-container-lowest placeholder-secondary focus:border-primary focus:ring-4 focus:ring-blue-100/30 outline-none transition-all duration-200 text-on-surface text-sm font-normal disabled:opacity-50"
                   />
                 </div>
               </div>
 
               {/* Password Input Group */}
               <div className="flex flex-col gap-1.5 relative group">
-                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <label className="text-xs font-semibold text-secondary uppercase tracking-wider">
                   Password
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-[#2B7FFF] transition-colors" />
+                    <Lock className="h-5 w-5 text-secondary group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type={showPassword ? "text" : "password"}
@@ -231,13 +231,13 @@ function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     disabled={isSubmitting || success}
-                    className="block w-full pl-11 pr-11 py-2.5 border border-gray-200 rounded-2xl bg-gray-50/50 hover:bg-white focus:bg-white placeholder-gray-400 focus:border-[#2B7FFF] focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-200 text-gray-900 text-sm font-normal disabled:opacity-50"
+                    className="block w-full pl-11 pr-11 py-2.5 border border-separator rounded-2xl bg-surface-container-low hover:bg-surface-container-lowest focus:bg-surface-container-lowest placeholder-secondary focus:border-primary focus:ring-4 focus:ring-blue-100/30 outline-none transition-all duration-200 text-on-surface text-sm font-normal disabled:opacity-50"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     disabled={isSubmitting || success}
-                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-secondary hover:text-on-surface transition-colors cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
@@ -246,12 +246,12 @@ function Register() {
 
               {/* Confirm Password Input Group */}
               <div className="flex flex-col gap-1.5 relative group">
-                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <label className="text-xs font-semibold text-secondary uppercase tracking-wider">
                   Confirm Password
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-[#2B7FFF] transition-colors" />
+                    <Lock className="h-5 w-5 text-secondary group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type={showConfirmPassword ? "text" : "password"}
@@ -259,13 +259,13 @@ function Register() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
                     disabled={isSubmitting || success}
-                    className="block w-full pl-11 pr-11 py-2.5 border border-gray-200 rounded-2xl bg-gray-50/50 hover:bg-white focus:bg-white placeholder-gray-400 focus:border-[#2B7FFF] focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-200 text-gray-900 text-sm font-normal disabled:opacity-50"
+                    className="block w-full pl-11 pr-11 py-2.5 border border-separator rounded-2xl bg-surface-container-low hover:bg-surface-container-lowest focus:bg-surface-container-lowest placeholder-secondary focus:border-primary focus:ring-4 focus:ring-blue-100/30 outline-none transition-all duration-200 text-on-surface text-sm font-normal disabled:opacity-50"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     disabled={isSubmitting || success}
-                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-secondary hover:text-on-surface transition-colors cursor-pointer"
                   >
                     {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
@@ -281,15 +281,15 @@ function Register() {
                     checked={agreeTerms}
                     onChange={(e) => setAgreeTerms(e.target.checked)}
                     disabled={isSubmitting || success}
-                    className="h-4 w-4 text-[#2B7FFF] focus:ring-blue-500 border-gray-300 rounded cursor-pointer mt-0.5"
+                    className="h-4 w-4 text-primary focus:ring-blue-500 border-separator rounded cursor-pointer mt-0.5"
                   />
                 </div>
                 <div className="ml-2.5 text-sm select-none">
-                  <label htmlFor="agree-terms" className="font-medium text-[#71717B] cursor-pointer">
+                  <label htmlFor="agree-terms" className="font-medium text-secondary cursor-pointer">
                     I agree to the{" "}
-                    <Link to="/terms" className="text-[#2B7FFF] hover:underline font-bold">Terms of Service</Link>
+                    <Link to="/terms" className="text-primary hover:underline font-bold">Terms of Service</Link>
                     {" "}and{" "}
-                    <Link to="/privacy" className="text-[#2B7FFF] hover:underline font-bold">Privacy Policy</Link>
+                    <Link to="/privacy" className="text-primary hover:underline font-bold">Privacy Policy</Link>
                   </label>
                 </div>
               </div>
@@ -315,11 +315,11 @@ function Register() {
             </form>
 
             {/* Login Footer */}
-            <p className="mt-6 text-center text-sm text-[#71717B]">
+            <p className="mt-6 text-center text-sm text-secondary">
               Already have an account?{" "}
               <Link 
                 to="/login" 
-                className="font-bold text-[#2B7FFF] hover:underline hover:text-blue-700 transition-colors"
+                className="font-bold text-primary hover:underline hover:text-blue-700 transition-colors"
               >
                 Sign in
               </Link>

@@ -38,7 +38,7 @@ function Hero() {
   ];
 
   return (
-    <div className="border-b border-gray-200 bg-[#FFFFFF] sticky top-0 z-50">
+    <div className="border-b border-separator bg-surface-container-lowest sticky top-0 z-50">
       <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between font-medium relative">
         
         {/* Brand Logo */}
@@ -47,17 +47,17 @@ function Hero() {
             size={36}
             className="text-[#FFFFFF] bg-[#2B7FFF] p-1.5 rounded-xl shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300"
           />
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900 group-hover:text-blue-600 transition-colors">QuickLog</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-on-surface group-hover:text-blue-600 transition-colors">QuickLog</h1>
         </Link>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8">
-          <ul className="flex flex-row gap-8 items-center text-[#71717B]">
+          <ul className="flex flex-row gap-8 items-center text-secondary">
             {navLinks.map((link) => (
               <li key={link.to} className="list-none">
                 <Link
                   to={link.to}
-                  className="relative flex flex-row items-center gap-2 text-base font-semibold hover:text-[#000000] pb-1.5 transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-blue-600 after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100"
+                  className="relative flex flex-row items-center gap-2 text-base font-semibold hover:text-on-surface pb-1.5 transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-blue-600 after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100"
                 >
                   {link.icon}
                   <span>{link.label}</span>
@@ -71,13 +71,13 @@ function Hero() {
         <div className="hidden md:flex items-center gap-4">
           {isLoggedIn ? (
             <>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-100">
-                <UserCircle size={20} className="text-[#2B7FFF]" />
-                <span className="text-sm font-semibold text-gray-700">{user?.username}</span>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container border border-separator">
+                <UserCircle size={20} className="text-primary" />
+                <span className="text-sm font-semibold text-on-surface">{user?.username}</span>
               </div>
               <button 
                 onClick={handleLogout}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors duration-200 font-semibold cursor-pointer"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl hover:bg-red-500/10 text-secondary hover:text-red-500 transition-colors duration-200 font-semibold cursor-pointer"
               >
                 <LogOut size={18} />
                 Logout
@@ -87,7 +87,7 @@ function Hero() {
             <>
               <Link 
                 to="/login" 
-                className="px-5 py-2.5 rounded-xl hover:bg-gray-50 text-gray-700 hover:text-gray-900 transition-colors duration-200 font-semibold"
+                className="px-5 py-2.5 rounded-xl hover:bg-surface-container text-secondary hover:text-on-surface transition-colors duration-200 font-semibold"
               >
                 Login
               </Link>
@@ -106,7 +106,7 @@ function Hero() {
           <button
             onClick={toggleMenu}
             aria-label="Toggle navigation menu"
-            className="p-2 rounded-xl border border-gray-100 hover:bg-gray-50 text-gray-700 hover:text-gray-900 focus:outline-none transition-colors duration-200 cursor-pointer"
+            className="p-2 rounded-xl border border-separator hover:bg-surface-container text-secondary hover:text-on-surface focus:outline-none transition-colors duration-200 cursor-pointer"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -114,14 +114,14 @@ function Hero() {
 
         {/* Mobile Navigation Drawer (Absolute positioned) */}
         {isOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-xl py-4 flex flex-col md:hidden animate-in fade-in slide-in-from-top-4 duration-200 z-50">
+          <div className="absolute top-full left-0 w-full bg-surface-container-lowest border-b border-separator shadow-xl py-4 flex flex-col md:hidden animate-in fade-in slide-in-from-top-4 duration-200 z-50">
             <nav className="flex flex-col mb-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-3 px-6 py-3.5 text-gray-600 hover:text-black font-semibold text-lg hover:bg-gray-50 border-l-4 border-transparent hover:border-[#2B7FFF] transition-all"
+                  className="flex items-center gap-3 px-6 py-3.5 text-secondary hover:text-on-surface font-semibold text-lg hover:bg-surface-container border-l-4 border-transparent hover:border-primary transition-all"
                 >
                   {link.icon}
                   <span>{link.label}</span>
@@ -132,13 +132,13 @@ function Hero() {
             <div className="border-t border-gray-100 pt-4 px-6 flex flex-col gap-3">
               {isLoggedIn ? (
                 <>
-                  <div className="flex items-center gap-2 py-3 px-4 bg-gray-50 rounded-2xl border border-gray-100">
-                    <UserCircle size={20} className="text-[#2B7FFF]" />
-                    <span className="font-bold text-gray-700">{user?.username}</span>
+                  <div className="flex items-center gap-2 py-3 px-4 bg-surface-container rounded-2xl border border-separator">
+                    <UserCircle size={20} className="text-primary" />
+                    <span className="font-bold text-on-surface">{user?.username}</span>
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-center py-3 border border-red-200 rounded-2xl hover:bg-red-50 text-red-600 font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full text-center py-3 border border-red-500/20 rounded-2xl hover:bg-red-500/10 text-red-500 font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <LogOut size={18} />
                     Logout
@@ -149,7 +149,7 @@ function Hero() {
                   <Link
                     to="/login"
                     onClick={() => setIsOpen(false)}
-                    className="w-full text-center py-3 border border-gray-200 rounded-2xl hover:bg-gray-50 text-gray-700 font-bold transition-all"
+                    className="w-full text-center py-3 border border-separator rounded-2xl hover:bg-surface-container text-secondary hover:text-on-surface font-bold transition-all"
                   >
                     Login
                   </Link>
