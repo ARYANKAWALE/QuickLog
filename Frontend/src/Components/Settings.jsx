@@ -33,70 +33,71 @@ function Settings() {
   };
 
   return (
-    <div className="w-full bg-background text-on-surface flex flex-col flex-grow">
+    <div className="w-full bg-background text-on-surface flex flex-col flex-grow px-4 sm:px-6 lg:px-8">
       {isLoggedIn ? (
-        <div>
-          {/* Left side */}
-          <div className="flex-grow border border-separator items-center flex flex-row pt-7 pb-section-gap px-gutter-desktop max-w-[1310px] mx-auto w-full justify-between bg-surface-container-lowest rounded-xl my-10 shadow-sm">
-            <div className="flex w-[320px] justify-around gap-5">
-              <div className="flex">
-                <img
-                  src={gym1}
-                  className="w-[100px] h-[100px] rounded-full"
-                  alt="profile image"
-                />
-              </div>
-              <div className="w-fit flex flex-col items-center justify-around">
-                <p className="font-bold text-3xl">{user?.username}</p>
+        <div className="w-full max-w-[1310px] mx-auto">
+          {/* Profile header card */}
+          <div className="flex-grow border border-separator flex flex-col md:flex-row items-center pt-6 pb-6 px-6 md:px-gutter-desktop w-full justify-between bg-surface-container-lowest rounded-xl my-6 md:my-10 shadow-sm gap-6 text-center md:text-left">
+            <div className="flex flex-col md:flex-row items-center gap-5">
+              <img
+                src={gym1}
+                className="w-20 h-20 sm:w-[100px] sm:h-[100px] rounded-full object-cover"
+                alt="profile image"
+              />
+              <div className="flex flex-col">
+                <p className="font-bold text-2xl sm:text-3xl text-on-surface">{user?.username}</p>
               </div>
             </div>
-            <div className="flex gap-5">
-              <div className="px-3 py-2 rounded-lg text-[#026FEF] border border-primary bg-surface-container-lowest flex flex-row gap-2">
-                <Share2 className="text-primary" />
-                <button className="text-primary">Share stats</button>
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <div className="px-3 py-2 rounded-lg text-[#026FEF] border border-primary bg-surface-container-lowest flex flex-row gap-2 justify-center items-center">
+                <Share2 className="text-primary w-5 h-5" />
+                <button className="text-primary font-semibold text-sm">Share stats</button>
               </div>
-              <button className="px-5 py-2 rounded-lg bg-primary text-white font-bold cursor-pointer hover:opacity-90">
+              <button className="px-5 py-2.5 rounded-lg bg-primary text-white font-bold cursor-pointer hover:opacity-90 text-sm">
                 Edit profile
               </button>
             </div>
           </div>
-          <div>
-            <div className="flex flex-row justify-evenly">
-              <div className="flex flex-col gap-5">
-                <ul className="text-secondary">
-                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
+
+          <div className="w-full">
+            <div className="flex flex-col lg:flex-row gap-8 justify-between my-6">
+              {/* Left sidebar / mobile tabs container */}
+              <div className="flex flex-col gap-5 w-full lg:w-[25%] shrink-0">
+                <ul className="flex flex-row lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0 text-secondary w-full border-b border-separator lg:border-b-0 scrollbar-none">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface whitespace-nowrap cursor-pointer">
                     <Link>Account details</Link>
                   </li>
-                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface whitespace-nowrap cursor-pointer">
                     Preferences
                   </li>
-                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface whitespace-nowrap cursor-pointer">
                     Privacy & safety
                   </li>
-                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface">
+                  <li className="p-2 rounded-lg hover:bg-surface-container-low hover:text-on-surface whitespace-nowrap cursor-pointer">
                     Subscription
                   </li>
                 </ul>
-                <div className="bg-separator h-[1px] w-full"></div>
-                <div className="rounded-lg px-4 justify-center hover:bg-red-500/10 py-2 text-red-500 cursor-pointer flex flex-row gap-2 items-center">
+                <div className="hidden lg:block bg-separator h-[1px] w-full"></div>
+                <div className="rounded-lg px-4 justify-center hover:bg-red-500/10 py-2 text-red-500 cursor-pointer flex flex-row gap-2 items-center w-full lg:w-auto">
                   <LogOut />
-                  <button onClick={handleLogout}>
+                  <button onClick={handleLogout} className="font-semibold text-sm">
                     Logout
                   </button>
                 </div>
               </div>
 
-              {/* Right side */}
-              <div className="flex flex-col gap-6 w-[50%]">
+              {/* Right side form panels */}
+              <div className="flex flex-col gap-6 w-full lg:w-[70%]">
+                {/* Account Details Box */}
                 <div className="bg-surface-container-low w-full rounded-2xl border border-separator">
-                  <div className="flex flex-row justify-between px-10 mt-5">
+                  <div className="flex flex-row justify-between px-6 md:px-10 mt-5">
                     <p className="font-medium text-xl text-on-surface">Account Details</p>
-                    <p className="bg-primary py-1 px-2 rounded-full text-white">
+                    <p className="bg-primary py-1 px-2.5 rounded-full text-white text-xs font-bold self-center">
                       Pro
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-xl w-full">
+                  <div className="p-4 md:p-6 rounded-xl w-full">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                       <div className="flex flex-col gap-2">
                         <label
@@ -143,10 +144,10 @@ function Settings() {
                     </div>
                   </div>
 
-                  <div className="flex flex-row items-center justify-between gap-40 p-5 bg-primary-muted border border-primary/20 m-10 rounded-xl">
-                    <div className="flex flex-row items-center gap-2">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-5 bg-primary-muted border border-primary/20 m-4 md:m-10 rounded-xl text-center sm:text-left">
+                    <div className="flex flex-col sm:flex-row items-center gap-3">
                       <div>
-                        <Star className="p-1 h-14 w-auto rounded-full bg-primary text-white" />
+                        <Star className="p-3 h-12 w-12 rounded-full bg-primary text-white" />
                       </div>
                       <div>
                         <p className="font-bold text-primary">
@@ -158,30 +159,31 @@ function Settings() {
                       </div>
                     </div>
                     <div>
-                      <p className="text-primary font-semibold">Manage Plans</p>
+                      <p className="text-primary font-bold cursor-pointer hover:underline text-sm">Manage Plans</p>
                     </div>
                   </div>
                 </div>
 
+                {/* Preferences Box */}
                 <div className="bg-surface-container-low w-full rounded-2xl border border-separator">
-                  <div className="flex flex-row justify-between px-10 mt-5">
+                  <div className="flex flex-row justify-between px-6 md:px-10 mt-5">
                     <p className="font-medium text-xl text-on-surface">Preferences</p>
                   </div>
-                  <div className="p-6">
-                    <div className="flex gap-5 flex-col">
-                      <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35">
+                  <div className="p-4 md:p-6">
+                    <div className="flex gap-4 flex-col">
+                      <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35 gap-4">
                         <div className="flex flex-row items-center gap-3">
-                          <Moon className="text-primary" />
+                          <Moon className="text-primary shrink-0" />
                           <div>
-                            <p className="font-medium text-lg text-on-surface">{theme === "dark" ? "Dark" : "Light"} Mode</p>
-                            <p className="text-sm text-secondary">
+                            <p className="font-medium text-base sm:text-lg text-on-surface">{theme === "dark" ? "Dark" : "Light"} Mode</p>
+                            <p className="text-xs sm:text-sm text-secondary">
                               Switch between light theme & dark themes
                             </p>
                           </div>
                         </div>
                         <button
                           onClick={handleToggle}
-                          className={`w-11 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+                          className={`w-11 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 shrink-0 ${
                             toggle ? "bg-primary" : "bg-surface-dim"
                           }`}
                         >
@@ -192,41 +194,43 @@ function Settings() {
                           />
                         </button>
                       </div>
-                      <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35">
+                      <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35 gap-4">
                         <div className="flex flex-row items-center gap-3">
-                          <BriefcaseMedical className="text-primary" />
+                          <BriefcaseMedical className="text-primary shrink-0" />
                           <div>
-                            <p className="font-medium text-lg text-on-surface">
+                            <p className="font-medium text-base sm:text-lg text-on-surface">
                               Health App Integration
                             </p>
-                            <p className="text-sm text-secondary">
+                            <p className="text-xs sm:text-sm text-secondary">
                               Sync your metrics with Apple Health or Google Fit
                             </p>
                           </div>
                         </div>
-                        <button className="py-1 px-2 rounded-full bg-surface-dim text-on-secondary-fixed-variant text-sm font-semibold">
+                        <button className="py-1 px-3 rounded-full bg-surface-dim text-on-secondary-fixed-variant text-xs font-semibold shrink-0">
                           Soon
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                {/* Security Box */}
                 <div className="bg-surface-container-low w-full rounded-2xl border border-separator mb-10">
-                  <div className="flex flex-row justify-between px-10 mt-5">
+                  <div className="flex flex-row justify-between px-6 md:px-10 mt-5">
                     <p className="font-medium text-xl text-on-surface">Security & Sessions</p>
                   </div>
-                  <div className="p-6">
+                  <div className="p-4 md:p-6">
                     <div className="flex flex-row items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-separator/35">
                       <div className="flex flex-row items-center gap-3">
-                        <Laptop className="text-primary h-12 w-auto p-2 rounded-full bg-primary-muted" />
+                        <Laptop className="text-primary h-12 w-auto p-2 rounded-full bg-primary-muted shrink-0" />
                         <div>
-                          <p className="font-medium text-lg text-on-surface">Your Device</p>
-                          <p className="text-sm text-primary font-semibold">
+                          <p className="font-medium text-base sm:text-lg text-on-surface">Your Device</p>
+                          <p className="text-xs sm:text-sm text-primary font-semibold">
                             Current Session
                           </p>
                         </div>
                       </div>
-                      <EllipsisVertical className="text-secondary" />
+                      <EllipsisVertical className="text-secondary shrink-0" />
                     </div>
                   </div>
                 </div>
@@ -235,8 +239,8 @@ function Settings() {
           </div>
         </div>
       ) : (
-        <div>
-          <p>Please login to view settings</p>
+        <div className="text-center py-20">
+          <p className="text-secondary">Please login to view settings</p>
         </div>
       )}
     </div>

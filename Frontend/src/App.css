@@ -88,6 +88,8 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-smoothing: grayscale;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
 }
 
 .glass-card {

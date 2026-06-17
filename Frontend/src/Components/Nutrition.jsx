@@ -635,7 +635,7 @@ function Nutrition() {
 
   if (authLoading) {
     return (
-      <main className="flex-grow pt-24 pb-section-gap px-gutter-desktop max-w-[1440px] mx-auto w-full flex items-center justify-center min-h-[50vh]">
+      <main className="flex-grow pt-24 pb-section-gap px-gutter-desktop max-w-[1440px] mx-auto w-full flex items-center justify-center min-h-[50vh] bg-white dark:bg-background">
         <div className="flex flex-col items-center gap-3">
           <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
           <span className="font-label-md text-label-md text-secondary">Checking authentication...</span>
@@ -759,7 +759,7 @@ function Nutrition() {
 
   if (isLoading) {
     return (
-      <main className="flex-grow pt-24 pb-section-gap px-gutter-desktop max-w-[1440px] mx-auto w-full flex items-center justify-center min-h-[50vh]">
+      <main className="flex-grow pt-24 pb-section-gap px-gutter-desktop max-w-[1440px] mx-auto w-full flex items-center justify-center min-h-[50vh] bg-white dark:bg-background">
         <div className="flex flex-col items-center gap-3">
           <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
           <span className="font-label-md text-label-md text-secondary">Loading your nutrition data...</span>
@@ -803,7 +803,7 @@ function Nutrition() {
     `}</style>
 
     <div className="w-full bg-background text-on-surface flex flex-col flex-grow">
-      <main className="flex-grow pt-7 pb-section-gap px-gutter-desktop max-w-[1310px] mx-auto w-full">
+      <main className="flex-grow pt-7 pb-section-gap px-4 md:px-gutter-desktop max-w-[1310px] mx-auto w-full">
         {/* Dashboard Header */}
       <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 mb-stack-lg">
         <div>
@@ -972,7 +972,7 @@ function Nutrition() {
             </div>
           </div>
 
-          <div className="mt-auto pt-6 border-t border-separator grid grid-cols-2 gap-4">
+          <div className="mt-auto pt-6 border-t border-separator grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Water Intake Card */}
             <div className="bg-[#EAF3FF]/60 dark:bg-blue-950/20 border border-[#D5E8FF] dark:border-blue-900/30 p-4 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
               <div className="flex justify-between items-center w-full">
@@ -1058,57 +1058,96 @@ function Nutrition() {
             )}
           </div>
           
-          <div className="overflow-x-auto">
+          <div>
             {meals.length === 0 ? (
               <div className="p-8 text-center text-secondary font-label-md">
                 No food logged for this day. Start fueling your day by clicking "Log Meal".
               </div>
             ) : (
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="bg-surface-container-low font-caption-sm text-caption-sm text-secondary">
-                    <th className="px-8 py-4">Entry Name</th>
-                    <th className="px-8 py-4">Time</th>
-                    <th className="px-8 py-4 text-right">Macros (P/C/F)</th>
-                    <th className="px-8 py-4 text-right">Energy</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-separator">
+              <>
+                {/* Mobile list view */}
+                <div className="block md:hidden divide-y divide-separator">
                   {meals.map((meal) => (
-                    <tr key={meal._id} className="hover:bg-surface-container-lowest transition-colors group">
-                      <td className="px-8 py-6">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-xl bg-surface-dim overflow-hidden flex-shrink-0">
-                            <img className="w-full h-full object-cover" alt={meal.name} src={meal.image} />
-                          </div>
-                          <div>
-                            <p className="font-body-base text-body-base text-on-surface">{meal.name}</p>
-                            <p className="font-caption-sm text-caption-sm text-secondary">{meal.type} • {meal.category}</p>
-                          </div>
+                    <div key={meal._id} className="p-5 flex flex-col gap-3 hover:bg-surface-container-lowest transition-colors">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-surface-dim overflow-hidden flex-shrink-0">
+                          <img className="w-full h-full object-cover" alt={meal.name} src={meal.image} />
                         </div>
-                      </td>
-                      <td className="px-8 py-6 font-label-md text-label-md text-secondary">{meal.time}</td>
-                      <td className="px-8 py-6 text-right font-label-md text-label-md text-secondary">
-                        {meal.protein}g / {meal.carbs}g / {meal.fats}g
-                      </td>
-                      <td className="px-8 py-6 text-right">
-                        <div className="flex items-center justify-end gap-4">
-                          <span className="font-stat-lg text-heading-md text-primary">
-                            {meal.calories} <span className="text-xs font-normal text-secondary">kcal</span>
+                        <div className="flex-grow min-w-0">
+                          <p className="font-body-base text-body-base text-on-surface truncate font-semibold">{meal.name}</p>
+                          <p className="font-caption-sm text-caption-sm text-secondary">{meal.time} • {meal.type} • {meal.category}</p>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center pt-2">
+                        <div className="text-xs text-secondary">
+                          <span className="font-semibold text-on-surface">{meal.protein}g</span> P / <span className="font-semibold text-on-surface">{meal.carbs}g</span> C / <span className="font-semibold text-on-surface">{meal.fats}g</span> F
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="font-stat-lg text-base text-primary font-bold">
+                            {meal.calories} <span className="text-[10px] font-normal text-secondary">kcal</span>
                           </span>
                           <button
                             onClick={() => handleDeleteMeal(meal._id)}
-                            className="text-error hover:text-error/85 cursor-pointer flex items-center justify-center p-1 rounded-lg hover:bg-error-container/20 transition-all opacity-100 md:opacity-0 group-hover:opacity-100"
+                            className="text-error flex items-center justify-center p-2 rounded-lg bg-red-500/10 cursor-pointer"
                             title="Delete meal"
                           >
-                            <span className="material-symbols-outlined text-[20px]">delete</span>
+                            <span className="material-symbols-outlined text-[18px]">delete</span>
                           </button>
                         </div>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   ))}
-                </tbody>
-              </table>
+                </div>
+
+                {/* Desktop table view */}
+                <div className="hidden md:block overflow-x-auto">
+                  <table className="w-full text-left">
+                    <thead>
+                      <tr className="bg-surface-container-low font-caption-sm text-caption-sm text-secondary">
+                        <th className="px-8 py-4">Entry Name</th>
+                        <th className="px-8 py-4">Time</th>
+                        <th className="px-8 py-4 text-right">Macros (P/C/F)</th>
+                        <th className="px-8 py-4 text-right">Energy</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-separator">
+                      {meals.map((meal) => (
+                        <tr key={meal._id} className="hover:bg-surface-container-lowest transition-colors group">
+                          <td className="px-8 py-6">
+                            <div className="flex items-center gap-4">
+                              <div className="w-12 h-12 rounded-xl bg-surface-dim overflow-hidden flex-shrink-0">
+                                <img className="w-full h-full object-cover" alt={meal.name} src={meal.image} />
+                              </div>
+                              <div>
+                                <p className="font-body-base text-body-base text-on-surface">{meal.name}</p>
+                                <p className="font-caption-sm text-caption-sm text-secondary">{meal.type} • {meal.category}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-8 py-6 font-label-md text-label-md text-secondary">{meal.time}</td>
+                          <td className="px-8 py-6 text-right font-label-md text-label-md text-secondary">
+                            {meal.protein}g / {meal.carbs}g / {meal.fats}g
+                          </td>
+                          <td className="px-8 py-6 text-right">
+                            <div className="flex items-center justify-end gap-4">
+                              <span className="font-stat-lg text-heading-md text-primary">
+                                {meal.calories} <span className="text-xs font-normal text-secondary">kcal</span>
+                              </span>
+                              <button
+                                onClick={() => handleDeleteMeal(meal._id)}
+                                className="text-error hover:text-error/85 cursor-pointer flex items-center justify-center p-1 rounded-lg hover:bg-error-container/20 transition-all opacity-100 md:opacity-0 group-hover:opacity-100"
+                                title="Delete meal"
+                              >
+                                <span className="material-symbols-outlined text-[20px]">delete</span>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
           </div>
         </div>
