@@ -273,12 +273,12 @@ function PersonalRecordsPanel({ records }) {
 function LogSessionModal({ isOpen, onClose, onSaved }) {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [notes, setNotes] = useState("");
-  const [exercises, setExercises] = useState([{ exercise: "", sets: 3, reps: 10, weight: 0, unit: "lbs" }]);
+  const [exercises, setExercises] = useState([{ exercise: "", sets: 3, reps: 10, weight: 0, unit: "kg" }]);
   const [saving, setSaving] = useState(false);
 
   if (!isOpen) return null;
 
-  const addRow = () => setExercises([...exercises, { exercise: "", sets: 3, reps: 10, weight: 0, unit: "lbs" }]);
+  const addRow = () => setExercises([...exercises, { exercise: "", sets: 3, reps: 10, weight: 0, unit: "kg" }]);
   const removeRow = (i) => setExercises(exercises.filter((_, idx) => idx !== i));
   const updateRow = (i, field, val) => {
     const rows = [...exercises];
@@ -359,8 +359,8 @@ function LogSessionModal({ isOpen, onClose, onSaved }) {
                 onChange={(e) => updateRow(i, "weight", parseFloat(e.target.value) || 0)} style={{ ...inputStyle, margin: 0 }} />
               <select value={ex.unit} onChange={(e) => updateRow(i, "unit", e.target.value)}
                 style={{ ...inputStyle, margin: 0, padding: "8px 4px" }}>
-                <option value="lbs">lbs</option>
                 <option value="kg">kg</option>
+                <option value="lbs">lbs</option>
               </select>
               <button type="button" onClick={() => removeRow(i)} disabled={exercises.length === 1}
                 style={{ background: "none", border: "none", cursor: "pointer", color: "var(--color-error,#ba1a1a)", opacity: exercises.length === 1 ? 0.3 : 1 }}>
