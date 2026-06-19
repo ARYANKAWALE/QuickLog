@@ -1,1 +1,1 @@
-export const DB_NAME = "warrentyLocker";
+export const DB_NAME = "Quicklog";

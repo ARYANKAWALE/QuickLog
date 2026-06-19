@@ -34,7 +34,7 @@ function Settings() {
   };
 
   return (
-    <div className="w-full bg-background text-on-surface flex flex-col flex-grow px-4 sm:px-6 lg:px-8">
+    <div className="w-full bg-background text-on-surface flex flex-col flex-grow px-4 sm:px-6 lg:px-8 min-h-screen">
       {isLoggedIn ? (
         <div className="w-full max-w-[1310px] mx-auto">
           {/* Profile header card */}

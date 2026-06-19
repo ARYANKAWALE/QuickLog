@@ -14,6 +14,7 @@ import { ThemeProvider } from './Components/ThemeContext.jsx';
 import AccountDetails from './Components/Cards/AccountDetails.jsx';
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import Preferences from "./Components/Cards/Preferences.jsx";
+import Onboarding from "./Components/Onboarding.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: 'setting', element: <Settings/>},
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+      { path: 'onboarding', element: <Onboarding /> },
       { path: '*', element: <NotFound /> },
     ]
   }

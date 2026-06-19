@@ -78,7 +78,12 @@ function Register() {
         login(json.data.token, json.data.user);
         setSuccess(true);
         setTimeout(() => {
-          navigate("/nutrition");
+          // navigate("/nutrition");
+          if(json.data.user.isProfileUpdated){
+            navigate("/home");
+          }else{
+            navigate("/onboarding");
+          }
         }, 800);
       } else {
         setError(json.message || "Registration failed. Please try again.");

@@ -15,7 +15,33 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required: true,
-    }
+    },
+    gender:{
+        type:String,
+        enum:['male', 'female', 'other'],
+        default:'male',
+    },
+    age:{
+        type:Number,
+        default:null,
+    },
+    weight:{
+        type:Number,
+        default:null,
+    },
+    height:{
+        type:Number,
+        default:null,
+    },
+    steps:{
+        type:Number,
+        default:0,
+    },
+    isProfileUpdated:{
+        type:Boolean,
+        default:false,
+    },
+    
 },{timestamp:true})
 
 
