@@ -113,12 +113,57 @@ export const loginUser = async (req, res) => {
           id: user._id,
           username: user.username,
           email: user.email,
-          isProfileUpdated:user.isProfileUpdated
+          isProfileUpdated:user.isProfileUpdated,
+          age: user.age,
+          gender: user.gender,
+          height: user.height,
+          weight: user.weight
         }
       }
     })
   } catch (error) {
     console.error('Login error:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Server error. Please try again.'
+    })
+  }
+}
+
+export const updateProfile = async(req,res)=>{
+  try{
+    const {age,gender,weight,height} = req.body
+    
+    if(!age || !gender || !weight || !height){
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide all fields.'
+      })
+    }
+
+    const user = await User.findById(req.user.id)
+    if(!user){
+      return res.status(404).json({
+        success: false,
+        message: 'User not found.'
+      })
+    }
+
+    user.age = age
+    user.gender = gender
+    user.weight = weight
+    user.height = height
+    user.isProfileUpdated = true
+
+    await user.save()
+
+    res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully.',
+      user
+    })
+  }catch(error){
+    console.error('Update profile error:', error)
     res.status(500).json({
       success: false,
       message: 'Server error. Please try again.'

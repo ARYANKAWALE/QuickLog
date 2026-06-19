@@ -1,30 +1,60 @@
-import React from "react";
-import {
-  Calendar,
-  Users,
-  Ruler,
-  Scale,
-  ArrowRight,
-} from "lucide-react";
+import { useState } from "react";
+import { Calendar, Users, Ruler, Scale, ArrowRight } from "lucide-react";
+import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
-// ── Placeholder images ────────────────────────────────────────────────────────
-const IMG_RUNNER =
-  "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=400&q=80";
-const IMG_WATCH =
-  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80";
-const IMG_APP =
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80";
 
 // Shared input class — uses only theme tokens
 const inputClass =
   "w-full rounded-xl bg-surface-container-low border border-separator px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary transition";
 
 function Onboarding() {
-  return (
-    <div
-      className="min-h-screen w-full flex flex-col items-center justify-center px-4 pb-19"
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
-    >
+  const { token, login, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!age || !gender || !height || !weight) {
+      setError("Please fill all the fields");
+      return;
+    }
+
+    setIsSubmitted(true);
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/user/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ age, gender, height, weight }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        login(token, { ...user, age,gender,height,weight,isProfileUpdated:true});
+        navigate("/home");
+      } else {
+        setError(data.message || "Something went wrong. Try again.");
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Something went wrong. Try again.");
+    } finally {
+      setIsSubmitted(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 pb-19">
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-extrabold text-on-surface tracking-tight mb-2">
@@ -36,11 +66,10 @@ function Onboarding() {
       </div>
 
       {/* ── Card ───────────────────────────────────────────────────────────── */}
-      <div className="w-full max-w-md bg-surface-container-lowest rounded-3xl shadow-xl border border-separator p-7">
-
+      <form onSubmit={handleSubmit}>
+        <div className="w-full max-w-md bg-surface-container-lowest rounded-3xl shadow-xl border border-separator p-7">
         {/* ── Input Grid ─────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-
           {/* Age */}
           <div className="flex flex-col gap-1.5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wide">
@@ -48,9 +77,10 @@ function Onboarding() {
               Age
             </label>
             <input
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
               type="number"
-              placeholder="25"
-              defaultValue="25"
+              placeholder="Enter Your Age"
               className={inputClass}
             />
           </div>
@@ -63,10 +93,13 @@ function Onboarding() {
             </label>
             <div className="relative">
               <select
-                defaultValue=""
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
                 className={`${inputClass} appearance-none cursor-pointer pr-8`}
               >
-                <option value="" disabled>Select</option>
+                <option value="" disabled>
+                  Select
+                </option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
@@ -80,7 +113,11 @@ function Onboarding() {
                   stroke="currentColor"
                   strokeWidth={2}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </div>
             </div>
@@ -93,9 +130,10 @@ function Onboarding() {
               Height (cm)
             </label>
             <input
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
               type="number"
-              placeholder="180"
-              defaultValue="180"
+              placeholder="Enter Your Height"
               className={inputClass}
             />
           </div>
@@ -107,9 +145,10 @@ function Onboarding() {
               Weight (kg)
             </label>
             <input
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
               type="number"
-              placeholder="75"
-              defaultValue="75"
+              placeholder="Enter Your Weight"
               className={inputClass}
             />
           </div>
@@ -117,13 +156,14 @@ function Onboarding() {
 
         {/* ── Continue Button ─────────────────────────────────────────────── */}
         <button
-          type="button"
+          type="submit"
           className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-primary-container text-on-primary font-semibold text-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98] cursor-pointer"
         >
           Continue
           <ArrowRight size={16} />
         </button>
       </div>
+      </form>
     </div>
   );
 }

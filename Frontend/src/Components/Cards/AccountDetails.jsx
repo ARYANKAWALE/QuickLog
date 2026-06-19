@@ -4,7 +4,10 @@ import { ChevronRight, Star } from "lucide-react";
 import { useState } from "react";
 
 function AccountDetails() {
-  const { user } = useAuth();
+
+  const {user,token} = useAuth();
+
+
   const [ email,setEmail] = useState("");
   const [ username,setUsername] = useState("");
   const [ age,setAge] = useState("");
@@ -15,9 +18,8 @@ function AccountDetails() {
   const handleSubmit=async(e)=>{
     e.preventDefault()
     
-    const token = localStorage.getItem("token")
 
-    const res = await fetch("http://localhost:3000/profile",{
+    const res = await fetch("http://localhost:3000/api/v1/user/profile",{
       method:"PUT",
       headers:{
         "Content-Type":"application/json",
@@ -61,7 +63,7 @@ function AccountDetails() {
                   id="fullName"
                   type="text"
                   className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
-                  value={user?.username || "Username not exist"}
+                  value={user?.username ?? "Username not exist"}
                   readOnly
                 />
                 <span className="absolute right-4 text-secondary pointer-events-none text-xs">
@@ -84,7 +86,7 @@ function AccountDetails() {
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
-                  value={user?.email || "Email not exist"}
+                  value={user?.email ?? "Email not exist"}
                   readOnly
                 />
                 <span className="absolute right-4 text-secondary pointer-events-none text-xs">
@@ -104,7 +106,7 @@ function AccountDetails() {
                   id="Age"
                   type="text"
                   className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
-                  value={user?.age || "Age not updated"}
+                  value={user?.age ?? "Age not updated"}
                   readOnly
                 />
                 <span className="absolute right-4 text-secondary pointer-events-none text-xs">
@@ -124,7 +126,7 @@ function AccountDetails() {
                   id="gender"
                   type="text"
                   className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
-                  value={user?.gender || "gender not updated"}
+                  value={user?.gender ?? "gender not updated"}
                   readOnly
                 />
                 <span className="absolute right-4 text-secondary pointer-events-none text-xs">
@@ -144,7 +146,7 @@ function AccountDetails() {
                   id="weight"
                   type="text"
                   className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
-                  value={user?.weight || "weight not updated"}
+                  value={user?.weight ?? "weight not updated"}
                   readOnly
                 />
                 <span className="absolute right-4 text-secondary pointer-events-none text-xs">
@@ -164,7 +166,7 @@ function AccountDetails() {
                   id="height"
                   type="text"
                   className="w-full bg-surface-container-lowest text-on-surface py-3.5 pl-4 pr-10 rounded-2xl shadow-sm border border-separator cursor-pointer outline-none font-medium text-base"
-                  value={user?.height || "height not updated"}
+                  value={user?.height ?? "height not updated"}
                   readOnly
                 />
                 <span className="absolute right-4 text-secondary pointer-events-none text-xs">
