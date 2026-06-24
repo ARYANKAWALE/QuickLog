@@ -54,9 +54,9 @@ function Settings() {
                 <Share2 className="text-primary w-5 h-5" />
                 <button className="text-primary font-semibold text-sm">Share stats</button>
               </div>
-              <button className="px-5 py-2.5 rounded-lg bg-primary text-white font-bold cursor-pointer hover:opacity-90 text-sm">
+              {/* <button className="px-5 py-2.5 rounded-lg bg-primary text-white font-bold cursor-pointer hover:opacity-90 text-sm">
                 Edit profile
-              </button>
+              </button> */}
             </div>
           </div>
 
